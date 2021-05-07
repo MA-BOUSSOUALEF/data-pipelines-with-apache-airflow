@@ -49,7 +49,7 @@ services:
     volumes:
       - ./dags:/opt/airflow/dags
       - logs:/opt/airflow/logs
-      - data:/data
+      - data:/opt/airflow/data
     environment: *airflow_environment
     command: scheduler
   events_api:

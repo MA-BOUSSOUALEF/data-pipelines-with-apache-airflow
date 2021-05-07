@@ -11,5 +11,5 @@ dag = DAG(
 )
 
 wait = FileSensor(
-    task_id="wait_for_supermarket_1", filepath="/data/supermarket1/data.csv", dag=dag
+    task_id="wait_for_supermarket_1", filepath="/opt/airflow/data/supermarket1/data.csv", dag=dag
 )

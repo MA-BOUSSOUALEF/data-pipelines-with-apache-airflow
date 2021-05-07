@@ -109,7 +109,7 @@ with DAG(
         templates_dict={
             "start_date": "{{ds}}",
             "end_date": "{{next_ds}}",
-            "output_path": "/data/python_operator/ratings/{{ds}}.json",
+            "output_path": "/opt/airflow/data/python_operator/ratings/{{ds}}.json",
         },
         provide_context=True,
     )
@@ -131,8 +131,8 @@ with DAG(
         task_id="rank_movies",
         python_callable=_rank_movies,
         templates_dict={
-            "input_path": "/data/python_operator/ratings/{{ds}}.json",
-            "output_path": "/data/python_operator/rankings/{{ds}}.csv",
+            "input_path": "/opt/airflow/data/python_operator/ratings/{{ds}}.json",
+            "output_path": "/opt/airflow/data/python_operator/rankings/{{ds}}.csv",
         },
         provide_context=True,
     )

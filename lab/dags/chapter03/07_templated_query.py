@@ -17,8 +17,8 @@ dag = DAG(
 fetch_events = BashOperator(
     task_id="fetch_events",
     bash_command=(
-        "mkdir -p /data/events && "
-        "curl -o /data/events.json "
+        "mkdir -p /opt/airflow/data/events && "
+        "curl -o /opt/airflow/data/events.json "
         "http://events_api:5000/events?"
         "start_date={{execution_date.strftime('%Y-%m-%d')}}&"     # @NOTE Formatted execution_date inserted with Jinja templating
         "end_date={{next_execution_date.strftime('%Y-%m-%d')}}"   # @NOTE next_execution_date holds the execution date of the next interval.
@@ -40,7 +40,7 @@ def _calculate_stats(input_path, output_path):
 calculate_stats = PythonOperator(
     task_id="calculate_stats",
     python_callable=_calculate_stats,
-    op_kwargs={"input_path": "/data/events.json", "output_path": "/data/stats.csv"},
+    op_kwargs={"input_path": "/opt/airflow/data/events.json", "output_path": "/opt/airflow/data/stats.csv"},
     dag=dag,
 )
 

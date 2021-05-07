@@ -16,7 +16,7 @@ create_metrics = DummyOperator(task_id="create_metrics", dag=dag)
 for supermarket_id in [1, 2, 3, 4]:
     wait = FileSensor(
         task_id=f"wait_for_supermarket_{supermarket_id}",
-        filepath=f"/data/supermarket{supermarket_id}/data.csv",
+        filepath=f"/opt/airflow/data/supermarket{supermarket_id}/data.csv",
         dag=dag,
     )
     copy = DummyOperator(task_id=f"copy_to_raw_supermarket_{supermarket_id}", dag=dag)

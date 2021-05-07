@@ -18,8 +18,8 @@ dag = DAG(
 fetch_events = BashOperator(
     task_id="fetch_events",
     bash_command=(
-        "mkdir -p /data/events && "
-        "curl -o /data/events/{{ds}}.json "
+        "mkdir -p /opt/airflow/data/events && "
+        "curl -o /opt/airflow/data/events/{{ds}}.json "
         "http://events_api:5000/events?"
         "start_date={{ds}}&"
         "end_date={{next_ds}}"
@@ -44,8 +44,8 @@ calculate_stats = PythonOperator(
     task_id="calculate_stats",
     python_callable=_calculate_stats,
     templates_dict={
-        "input_path": "/data/events/{{ds}}.json",
-        "output_path": "/data/stats/{{ds}}.csv",
+        "input_path": "/opt/airflow/data/events/{{ds}}.json",
+        "output_path": "/opt/airflow/data/stats/{{ds}}.csv",
     },
     provide_context=True,
     dag=dag,
@@ -66,7 +66,7 @@ send_stats = PythonOperator(
     task_id="send_stats",
     python_callable=_send_stats,
     op_kwargs={"email": "user@example.com"},
-    templates_dict={"stats_path": "/data/stats/{{ds}}.csv"},
+    templates_dict={"stats_path": "/opt/airflow/data/stats/{{ds}}.csv"},
     provide_context=True,
     dag=dag,
 )

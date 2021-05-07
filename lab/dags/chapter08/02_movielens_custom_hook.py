@@ -49,7 +49,7 @@ with DAG(
         templates_dict={
             "start_date": "{{ds}}",
             "end_date": "{{next_ds}}",
-            "output_path": "/data/custom_hook/{{ds}}.json",
+            "output_path": "/opt/airflow/data/custom_hook/{{ds}}.json",
         },
         provide_context=True,
     )

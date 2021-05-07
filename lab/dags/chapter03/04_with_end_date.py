@@ -16,8 +16,8 @@ dag = DAG(
 fetch_events = BashOperator(
     task_id="fetch_events",
     bash_command=(
-        "mkdir -p /data/events && "
-        "curl -o /data/events.json http://events_api:5000/events"
+        "mkdir -p /opt/airflow/data/events && "
+        "curl -o /opt/airflow/data/events.json http://events_api:5000/events"
     ),
     dag=dag,
 )
@@ -36,7 +36,7 @@ def _calculate_stats(input_path, output_path):
 calculate_stats = PythonOperator(
     task_id="calculate_stats",
     python_callable=_calculate_stats,
-    op_kwargs={"input_path": "/data/events.json", "output_path": "/data/stats.csv"},
+    op_kwargs={"input_path": "/opt/airflow/data/events.json", "output_path": "/opt/airflow/data/stats.csv"},
     dag=dag,
 )
 
