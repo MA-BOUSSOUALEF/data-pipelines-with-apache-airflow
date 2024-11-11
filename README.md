@@ -3,7 +3,7 @@
 Code accompanying the Manning book [Data Pipelines with Apache Airflow](https://www.manning.com/books/data-pipelines-with-apache-airflow).
 
 ### Structure
-
+ 
 Overall, this repository is structured as follows:
 
 ```
